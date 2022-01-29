@@ -1,23 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './App.css'
+const App = () => {
+  const arr = [
+    {
+      productName: "a",
+      id: 1,
+      qty: 2
+    },
+    {
+      productName: "b",
+      id: 2,
+      qty: 5
+    },
+    {
+      productName: "c",
+      id: 3,
+      qty: 6
+    }
+  ];
+  const [qty, setQty] = React.useState();
 
-function App() {
+  const incrementFunc = (i) => {
+    arr.map((curitem) => {
+      if (curitem.id === i) {
+        setQty(curitem.qty + 1);
+      }
+    })
+
+  }
+
+  const decrementFunc = (i) => {
+    arr.map((curritem) => {
+      if (curritem.id === i) {       
+        setQty(curritem.qty - 1);
+      }
+    })
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main_container">
+      <div className="sub_container">
+        {
+          arr.map((item) => (
+            <>
+              <h3>{item.productName}{item.qty}</h3>
+              <button onClick={() => incrementFunc(item.id)}>increment</button>
+              <button onClick={() => decrementFunc(item.id)}>decrement</button>
+            </>
+          ))
+        }
+
+      </div>
     </div>
   );
 }
